@@ -1,5 +1,14 @@
 # Nu primesc notă pentru că nu am pus titlu și descriere
+Nume proiect: Rarts Simulator
 
+Descriere:
+Acest proiect reprezintă un sistem interactiv pentru simularea, gestionarea și arbitrarea meciurilor de Darts.
+
+Aplicația își propune să:
+Gestioneze entitățile de bază (Jucători, Săgeți, Meciuri).
+Urmărească istoricul aruncărilor (hit, miss, dublă, triplă, bullseye).
+Valideze regulile specifice jocului și să gestioneze erorile (ex: aruncări invalide, depășirea punctajului necesar - regula de "bust").
+Ofere o bază extensibilă pentru a suporta în viitor multiple moduri de joc recunoscute oficial (ex: 301/501, Cricket, Around the Clock).
 ### Folosiți template-ul corespunzător grupei voastre!
 
 | Laborant  | Link template                                |
