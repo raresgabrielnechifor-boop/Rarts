@@ -9,14 +9,9 @@ private:
     int weight;
 
 public:
-    Dart (string dartBrand, int dartWeight) {
-        brand = dartBrand;
-        weight = dartWeight;
-    }
-    Dart() {
-        brand = "Unknown";
-        weight = 0;
-    }
+    Dart (const string& dartBrand, int dartWeight) : brand(dartBrand), weight(dartWeight) {}
+    Dart() : brand("Unknown"), weight(0) {}
+
     friend ostream& operator<<(ostream &os, const Dart &d) {
         os << "Dart: "<< d.brand << "(" << d.weight << " g)";
         return os;
@@ -30,12 +25,23 @@ private:
     Dart myDart;
 
     public:
-    Player(string playerName, int initialScore, Dart playerDart) {
-        name = playerName;
-        currentScore = initialScore;
-        myDart = playerDart;
 
+    Player(const string& playerName, int initialScore, const Dart& playerDart):
+        name(playerName), currentScore(initialScore), myDart(playerDart) {}
+    Player() : name("Unknown"), currentScore(0) {}
+
+    Player(const Player& other) : name(other.name), currentScore(other.currentScore), myDart(other.myDart) {}
+
+    Player& operator= (const Player& other) {
+        if (this != &other) {
+            name = other.name;
+            currentScore = other.currentScore;
+            myDart = other.myDart;
+        }
+        return *this;
     }
+
+    ~Player() {}
 
     bool throwDart (int pointsScored) {
         cout << name << " throws for " << pointsScored << " points...\n";
@@ -64,10 +70,6 @@ private:
         os << "Player: " << p.name <<" | Score: "<< p.currentScore << " | " << p.myDart;
         return os;
     }
-    Player() {
-        name = "Unknown";
-        currentScore = 0;
-    }
 };
 
 class Match {
@@ -77,11 +79,8 @@ private:
     Player player2;
 
 public:
-    Match (string name, Player p1, Player p2) {
-        tournamentName = name;
-        player1 = p1;
-        player2 = p2;
-    }
+    Match (const string& name, const Player& p1, const Player& p2):
+        tournamentName(name), player1(p1), player2(p2) {}
 
     void playRound (int p1Score, int p2Score) {
         cout << "\n--- Round Started ---\n";
