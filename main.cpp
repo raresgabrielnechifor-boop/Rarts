@@ -17,8 +17,9 @@ public:
         brand = "Unknown";
         weight = 0;
     }
-    void displayDart() {
-        cout << "Dart: " << brand << " (" << weight << " g)" << endl;
+    friend ostream& operator<<(ostream &os, const Dart &d) {
+        os << "Dart: "<< d.brand << "(" << d.weight << " g)";
+        return os;
     }
 };
 class Player {
@@ -35,15 +36,47 @@ private:
 
     }
 
-    void displayStatus() {
-        cout << "Player: " << name << " | Score: " << currentScore << endl;
-        myDart.displayDart();
+    friend ostream& operator<<(ostream& os, const Player& p) {
+        os << "Player: " << p.name <<" | Score: "<< p.currentScore << " | " << p.myDart;
+        return os;
     }
+    Player() {
+        name = "Unknown";
+        currentScore = 0;
+    }
+};
+class Match {
+private:
+    string tournamentName;
+    Player player1;
+    Player player2;
+
+public:
+    Match (string name, Player p1, Player p2) {
+        tournamentName = name;
+        player1 = p1;
+        player2 = p2;
+    }
+    friend ostream& operator<<(ostream& os, const Match& m) {
+        os  <<"\n=== MATCH START: " << m.tournamentName << " ===\n"
+            << m.player1 << "\n"
+            << m.player2 << "\n"
+            << "====================================\n";
+        return os;
+    }
+
+
 };
 int main()
 {
     Dart redDragon ("Red Dragon", 22);
+    Dart winmau ("Winmau", 23);
+
     Player player1("Rares", 301 , redDragon);
-    player1.displayStatus();
+    Player player2("Iarina", 302 , winmau);
+
+    Match finala("Campiontaul Mondial de Darts", player1, player2);
+
+    cout << finala;
     return 0;
 }
