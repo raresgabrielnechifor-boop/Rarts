@@ -108,20 +108,40 @@ public:
 
 int main()
 {
-    Dart redDragon ("Red Dragon", 22);
-    Dart winmau ("Winmau", 23);
+    string name1, name2;
+    int startScore;
 
-    Player player1("Rares", 50 , redDragon);
-    Player player2("Iarina", 50 , winmau);
+    cout << "--- Match settings ---\n";
+    cout << "Enter starting score: ";
+    cin >> startScore;
 
-    Match finala("Campiontaul Mondial de Darts", player1, player2);
-    cout << finala;
+    cout << "Enter name of player 1: ";
+    cin >> name1;
 
-    finala.playRound(20, 45);
-    cout << finala;
+    cout << "Enter name of player 2: ";
+    cin >> name2;
 
-    finala.playRound(40, 5);
-    cout << finala;
+    cout<< "\nGenerating Match...\n";
 
+    Dart d1 ("Red Dragon", 22);
+    Dart d2 ("Winmau", 23);
+
+    Player player1 (name1, startScore, d1);
+    Player player2 (name2, startScore, d2);
+
+    Match finalMatch("Local Darts Championship", player1, player2);
+    cout <<finalMatch;
+
+    finalMatch.playRound(45, 60);
+    cout <<finalMatch;
+
+    finalMatch.playRound(40, 30);
+    cout <<finalMatch;
+
+    finalMatch.playRound(100, 80);
+    cout <<finalMatch;
+
+    finalMatch.playRound(116, 120);
+    cout <<finalMatch;
     return 0;
 }
