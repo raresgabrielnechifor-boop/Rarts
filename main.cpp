@@ -62,7 +62,7 @@ private:
         return currentScore == 0;
     }
 
-    string getName() const {
+    const string& getName() const {
         return name;
     }
 
