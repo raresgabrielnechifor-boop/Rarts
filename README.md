@@ -1,5 +1,5 @@
-# Nu primesc notă pentru că nu am pus titlu și descriere
-Nume proiect: Rarts Simulator
+# Rarts Simulator
+
 
 Descriere:
 Acest proiect reprezintă un sistem interactiv pentru simularea, gestionarea și arbitrarea meciurilor de Darts.
