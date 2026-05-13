@@ -4,7 +4,7 @@
 #include "Match.h"
 #include "GameMode.h"
 #include "Exceptions.h"
-
+#include "AroundTheClockMode.h"
 using namespace std;
 
 int main() {
@@ -18,8 +18,8 @@ int main() {
     Player p1("Phil Taylor", 501, d1);
     Player p2("Michael van Gerwen", 501, d2);
 
-    Game501 proMode;
-    Match finalMatch("World Darts Championship", p1, p2, &proMode);
+    AroundTheClockMode clockMode;
+    Match finalMatch("World Darts Championship", p1, p2, &clockMode);
 
     cout << finalMatch;
 
