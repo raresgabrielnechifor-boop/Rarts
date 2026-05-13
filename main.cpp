@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 #include "Dart.h"
 #include "Player.h"
 #include "Match.h"
@@ -10,33 +11,47 @@ using namespace std;
 
 int main() {
 
-    cout << "Initial Darts: " << Dart::getTotalDartsCreated() << "\n";
-
     Dart d1("Red Dragon", 22);
     Dart d2("Winmau", 24);
 
-    cout << "Final Darts: " << Dart::getTotalDartsCreated() << "\n\n";
+    cout << "Choose the GameMode:\n";
+    cout << "1. Classic 301\n";
+    cout << "2. Pro 501\n";
+    cout << "3. Practice (Fara limita)\n";
+    cout << "4. Around The Clock (Modul nou adaugat)\n";
+    cout << "Number of your choice: ";
 
-    AroundTheClockMode clockMode;
+    int optiune;
+    cin >> optiune;
+
+    std::unique_ptr<GameMode> selectedMode;
+
+    switch (optiune) {
+        case 1: selectedMode = std::make_unique<Game301>(); break;
+        case 2: selectedMode = std::make_unique<Game501>(); break;
+        case 3: selectedMode = std::make_unique<PracticeMode>(); break;
+        case 4: selectedMode = std::make_unique<AroundTheClockMode>(); break;
+        default:
+            cout << "Invalid option! Default: Pro 501.\n";
+            selectedMode = std::make_unique<Game501>();
+            break;
+    }
 
     try {
-        Player p1("Phil Taylor", clockMode.getStartingScore(), d1);
-        Player p2("Michael van Gerwen", clockMode.getStartingScore(), d2);
+        Player p1("Phil Taylor", selectedMode->getStartingScore(), d1);
+        Player p2("Michael van Gerwen", selectedMode->getStartingScore(), d2);
 
-        Match finalMatch("World Darts Championship", p1, p2, &clockMode);
+        Match finalMatch("World Darts Championship", p1, p2, selectedMode.get());
 
         cout << finalMatch;
 
         finalMatch.playRound(20, 1);
-
         finalMatch.playRound(1, 2);
 
-        cout << "\nThrow history\n";
+        cout << "\nThrow History\n";
         finalMatch.printPlayerHistories();
 
         finalMatch.playRound(180, 3);
-
-        finalMatch.playRound(2, 3);
 
     } catch (const PlayerNotFoundException& e) {
         cout << "\n[PLAYER ERROR] " << e.what() << "\n";
@@ -49,8 +64,6 @@ int main() {
     } catch (const std::exception& e) {
         cout << "\n[SYSTEM ERROR] " << e.what() << "\n";
     }
-
-    cout << "\nGAME OVER!\n";
 
     return 0;
 }
