@@ -60,6 +60,9 @@ add_executable(${MAIN_EXECUTABLE_NAME}
         include/Match.h
         src/Match.cpp
         include/AroundTheClockMode.h
+        src/GameMode.cpp
+        src/AroundTheClockMode.cpp
+        src/Exceptions.cpp
 )
 target_sources(${MAIN_EXECUTABLE_NAME}
     PRIVATE

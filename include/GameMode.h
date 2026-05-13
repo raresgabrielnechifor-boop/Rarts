@@ -6,76 +6,45 @@ class GameMode {
 protected:
     std::string modeName;
     int startingScore;
-
 public:
-    GameMode(const std::string& name, int score) : modeName(name), startingScore(score) {}
-    
+    GameMode(const std::string& name, int score);
     virtual ~GameMode() = default;
 
-    virtual bool checkWinCondition(int currentScore) const = 0; 
+    virtual int processThrow(int currentScore, int pointsScored) const = 0;
+    virtual bool checkWinCondition(int currentScore) const = 0;
+    virtual void printDetails(std::ostream& os) const;
+    virtual void printRules() const;
+    virtual GameMode* clone() const = 0;
 
-    virtual void printRules() const {
-        std::cout << "Playing: " << modeName << " | Start Score: " << startingScore << "\n";
-    }
+    int getStartingScore() const;
+    std::string getName() const;
 
-    virtual GameMode* clone() const = 0; 
-
-    int getStartingScore() const { return startingScore; }
-    std::string getName() const { return modeName; }
+    friend std::ostream& operator<<(std::ostream& os, const GameMode& gm);
 };
 
 class Game301 : public GameMode {
 public:
-    Game301() : GameMode("Classic 301", 301) {}
-
-    bool checkWinCondition(int currentScore) const override {
-        return currentScore == 0;
-    }
-
-    void printRules() const override {
-        GameMode::printRules();
-        std::cout << "Rule: Must reach exactly 0. Bust applies.\n";
-    }
-
-    GameMode* clone() const override {
-        return new Game301(*this);
-    }
+    Game301();
+    int processThrow(int currentScore, int pointsScored) const override;
+    bool checkWinCondition(int currentScore) const override;
+    void printRules() const override;
+    GameMode* clone() const override;
 };
 
 class Game501 : public GameMode {
 public:
-    Game501() : GameMode("Pro 501", 501) {}
-
-    bool checkWinCondition(int currentScore) const override {
-        return currentScore == 0; 
-    }
-
-    void printRules() const override {
-        GameMode::printRules();
-        std::cout << "Rule: Pro standard. Must reach exactly 0.\n";
-    }
-
-    GameMode* clone() const override {
-        return new Game501(*this);
-    }
+    Game501();
+    int processThrow(int currentScore, int pointsScored) const override;
+    bool checkWinCondition(int currentScore) const override;
+    void printRules() const override;
+    GameMode* clone() const override;
 };
 
 class PracticeMode : public GameMode {
-private:
-    int targetPracticeThrows;
 public:
-    PracticeMode(int throws) : GameMode("Practice", 0), targetPracticeThrows(throws) {}
-
-    bool checkWinCondition(int currentScore) const override {
-        return false;
-    }
-
-    void printRules() const override {
-        GameMode::printRules();
-        std::cout << "Rule: Just hit the board " << targetPracticeThrows << " times.\n";
-    }
-
-    GameMode* clone() const override {
-        return new PracticeMode(*this);
-    }
+    PracticeMode();
+    int processThrow(int currentScore, int pointsScored) const override;
+    bool checkWinCondition(int currentScore) const override;
+    void printRules() const override;
+    GameMode* clone() const override;
 };

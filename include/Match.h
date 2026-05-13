@@ -23,5 +23,7 @@ public:
 
     void playRound(int p1Score, int p2Score);
 
+    void printPlayerHistories() const;
+
     friend std::ostream& operator<<(std::ostream& os, const Match& m);
 };
