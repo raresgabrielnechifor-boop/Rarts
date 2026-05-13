@@ -1,132 +1,45 @@
 #include <iostream>
-#include <string>
 #include "Dart.h"
+#include "Player.h"
+#include "Match.h"
+#include "GameMode.h"
+#include "Exceptions.h"
 
 using namespace std;
 
-class Player {
-private:
-    string name;
-    int currentScore;
-    Dart myDart;
+int main() {
+    cout << "Initial Darts: " << Dart::getTotalDartsCreated() << "\n";
 
-    public:
+    Dart d1("Red Dragon", 22);
+    Dart d2("Winmau", 24);
 
-    Player(const string& playerName, int initialScore, const Dart& playerDart):
-        name(playerName), currentScore(initialScore), myDart(playerDart) {}
-    Player() : name("Unknown"), currentScore(0) {}
+    cout << "Final Darts: " << Dart::getTotalDartsCreated() << "\n\n";
 
-    Player(const Player& other) : name(other.name), currentScore(other.currentScore), myDart(other.myDart) {}
+    Player p1("Phil Taylor", 501, d1);
+    Player p2("Michael van Gerwen", 501, d2);
 
-    Player& operator= (const Player& other) {
-        if (this != &other) {
-            name = other.name;
-            currentScore = other.currentScore;
-            myDart = other.myDart;
-        }
-        return *this;
+    Game501 proMode;
+    Match finalMatch("World Darts Championship", p1, p2, &proMode);
+
+    cout << finalMatch;
+
+    try {
+
+        finalMatch.playRound(60, 45);
+
+        finalMatch.playRound(180, 20);
+
+        finalMatch.playRound(20, 20);
+
+    } catch (const InvalidThrowException& e) {
+        cout << "\n[GAME ERROR] Game stopped! Reason: " << e.what() << "\n";
+    } catch (const DartsException& e) {
+        cout << "\n[GENERAL ERROR] " << e.what() << "\n";
+    } catch (const std::exception& e) {
+        cout << "\n[SYSTEM ERROR] " << e.what() << "\n";
     }
 
-    ~Player() {}
+    cout << "\nGAME OVER!\n";
 
-    bool throwDart (int pointsScored) {
-        cout << name << " throws for " << pointsScored << " points...\n";
-
-        if (currentScore - pointsScored < 0) {
-            cout << "  -> BUST! Score remains: "<< currentScore << ".\n";
-            return false;
-        }
-
-        else {
-            currentScore -= pointsScored;
-            cout << "  -> Good throw! Remaining score: " << currentScore << ".\n";
-            return true;
-        }
-    }
-
-    bool hasWon() const {
-        return currentScore == 0;
-    }
-
-    const string& getName() const {
-        return name;
-    }
-
-    friend ostream& operator<<(ostream& os, const Player& p) {
-        os << "Player: " << p.name <<" | Score: "<< p.currentScore << " | " << p.myDart;
-        return os;
-    }
-};
-
-class Match {
-private:
-    string tournamentName;
-    Player player1;
-    Player player2;
-
-public:
-    Match (const string& name, const Player& p1, const Player& p2):
-        tournamentName(name), player1(p1), player2(p2) {}
-
-    void playRound (int p1Score, int p2Score) {
-        cout << "\n--- Round Started ---\n";
-
-        player1.throwDart(p1Score);
-        if (player1.hasWon()) {
-            cout << "\n---" << player1.getName()<< " Wins! ---\n";
-            return;
-        }
-
-        player2.throwDart(p2Score);
-        if (player2.hasWon()) {
-            cout << "\n--- " << player2.getName()<< " Wins! ---\n";
-        }
-    }
-    friend ostream& operator<<(ostream& os, const Match& m) {
-        os  <<"\n=== MATCH START: " << m.tournamentName << " ===\n"
-            << m.player1 << "\n"
-            << m.player2 << "\n"
-            << "====================================\n";
-        return os;
-    }
-};
-
-int main()
-{
-    string name1, name2;
-    int startScore;
-
-    cout << "--- Match settings ---\n";
-    cout << "Enter starting score: ";
-    cin >> startScore;
-
-    cout << "Enter name of player 1: ";
-    cin >> name1;
-
-    cout << "Enter name of player 2: ";
-    cin >> name2;
-
-    cout<< "\nGenerating Match...\n";
-
-    Dart d1 ("Red Dragon", 22);
-    Dart d2 ("Winmau", 23);
-
-    Player player1 (name1, startScore, d1);
-    Player player2 (name2, startScore, d2);
-
-    Match finalMatch("Local Darts Championship", player1, player2);
-    cout <<finalMatch;
-
-    finalMatch.playRound(45, 60);
-    cout <<finalMatch;
-
-    finalMatch.playRound(40, 30);
-    cout <<finalMatch;
-
-    finalMatch.playRound(100, 80);
-    cout <<finalMatch;
-
-    finalMatch.playRound(116, 120);
-    cout <<finalMatch;
     return 0;
 }

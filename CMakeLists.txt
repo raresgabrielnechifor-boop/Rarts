@@ -55,6 +55,11 @@ add_executable(${MAIN_EXECUTABLE_NAME}
         include/GameMode.h
         include/Dart.h
         src/Dart.cpp
+        include/Player.h
+        src/Player.cpp
+        include/Match.h
+        src/Match.cpp
+        include/AroundTheClockMode.h
 )
 target_sources(${MAIN_EXECUTABLE_NAME}
     PRIVATE
