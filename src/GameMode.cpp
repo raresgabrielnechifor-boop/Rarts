@@ -4,7 +4,7 @@ GameMode::GameMode(const std::string& name, int score) : modeName(name), startin
 void GameMode::printDetails(std::ostream& os) const { os << "Playing: " << modeName << " | Start: " << startingScore; }
 void GameMode::printRules() const { std::cout << *this << "\n"; }
 int GameMode::getStartingScore() const { return startingScore; }
-std::string GameMode::getName() const { return modeName; }
+const std::string& GameMode::getName() const { return modeName; }
 std::ostream& operator<<(std::ostream& os, const GameMode& gm) { gm.printDetails(os); return os; }
 
 Game301::Game301() : GameMode("Classic 301", 301) {}

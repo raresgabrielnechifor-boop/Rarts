@@ -13,6 +13,7 @@ int main() {
 
     Dart d1("Red Dragon", 22);
     Dart d2("Winmau", 24);
+    cout << "Darts created: " << Dart::getTotalDartsCreated() << "\n";
 
     cout << "Choose the GameMode:\n";
     cout << "1. Classic 301\n";

@@ -25,7 +25,6 @@ public:
     bool throwDart(int pointsScored, const GameMode* mode);
 
     int getCurrentScore() const { return currentScore; }
-    bool hasWon() const;
     const std::string& getName() const;
 
     void printHistory() const;

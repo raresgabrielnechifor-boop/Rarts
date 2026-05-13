@@ -38,7 +38,7 @@ void Match::playRound(int p1Score, int p2Score) {
     if (mode) {
         mode->printRules();
 
-        Game501* isProMode = dynamic_cast<Game501*>(mode);
+        const Game501* isProMode = dynamic_cast<Game501*>(mode);
         if (isProMode) {
             std::cout << ">>> [ALERT] Pro 501 Active! No mistakes allowed! <<<\n";
         }

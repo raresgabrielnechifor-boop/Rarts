@@ -47,9 +47,6 @@ bool Player::throwDart(int pointsScored, const GameMode* mode) {
     }
 }
 
-bool Player::hasWon() const {
-    return currentScore == 0;
-}
 
 const std::string& Player::getName() const {
     return name;

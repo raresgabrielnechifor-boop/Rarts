@@ -17,7 +17,7 @@ public:
     virtual GameMode* clone() const = 0;
 
     int getStartingScore() const;
-    std::string getName() const;
+    const std::string& getName() const;
 
     friend std::ostream& operator<<(std::ostream& os, const GameMode& gm);
 };
