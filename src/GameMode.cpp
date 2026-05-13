@@ -21,6 +21,6 @@ GameMode* Game501::clone() const { return new Game501(*this); }
 
 PracticeMode::PracticeMode() : GameMode("Practice", 0) {}
 int PracticeMode::processThrow(int currentScore, int pointsScored) const { return currentScore + pointsScored; }
-bool PracticeMode::checkWinCondition(int currentScore) const { return false; }
+bool PracticeMode::checkWinCondition const { return false; }
 void PracticeMode::printRules() const { GameMode::printRules(); std::cout << "Rule: Just accumulate points.\n"; }
 GameMode* PracticeMode::clone() const { return new PracticeMode(*this); }
