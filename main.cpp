@@ -1,22 +1,8 @@
 #include <iostream>
 #include <string>
+#include "Dart.h"
 
 using namespace std;
-
-class Dart {
-private:
-    string brand;
-    int weight;
-
-public:
-    Dart (const string& dartBrand, int dartWeight) : brand(dartBrand), weight(dartWeight) {}
-    Dart() : brand("Unknown"), weight(0) {}
-
-    friend ostream& operator<<(ostream &os, const Dart &d) {
-        os << "Dart: "<< d.brand << "(" << d.weight << " g)";
-        return os;
-    }
-};
 
 class Player {
 private:
@@ -46,7 +32,7 @@ private:
     bool throwDart (int pointsScored) {
         cout << name << " throws for " << pointsScored << " points...\n";
 
-        if (currentScore -pointsScored < 0) {
+        if (currentScore - pointsScored < 0) {
             cout << "  -> BUST! Score remains: "<< currentScore << ".\n";
             return false;
         }
