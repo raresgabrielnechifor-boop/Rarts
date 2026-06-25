@@ -4,6 +4,7 @@
 
 class Logger {
 private:
+    int logCount = 0;
     Logger() = default;
 
 public:
@@ -12,5 +13,5 @@ public:
 
     static Logger& getInstance();
 
-    void log(const std::string& message) const;
+    void log(const std::string& message);
 };

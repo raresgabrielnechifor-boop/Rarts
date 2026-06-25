@@ -5,6 +5,7 @@ Logger& Logger::getInstance() {
     return instance;
 }
 
-void Logger::log(const std::string& message) const {
-    std::cout << "[MATCH LOG]: " << message << "\n";
+void Logger::log(const std::string& message) {
+    logCount++;
+    std::cout << "[MATCH LOG " << logCount << "]: " << message << "\n";
 }
