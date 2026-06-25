@@ -2,6 +2,7 @@
 #include "GameMode.h"
 #include "Exceptions.h"
 #include <utility>
+#include "Game501.h"
 
 Match::Match(const std::string& name, const Player& p1, const Player& p2, const GameMode* gameMode)
     : tournamentName(name), player1(p1), player2(p2) {

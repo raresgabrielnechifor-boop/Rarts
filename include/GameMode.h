@@ -21,30 +21,3 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const GameMode& gm);
 };
-
-class Game301 : public GameMode {
-public:
-    Game301();
-    int processThrow(int currentScore, int pointsScored) const override;
-    bool checkWinCondition(int currentScore) const override;
-    void printRules() const override;
-    GameMode* clone() const override;
-};
-
-class Game501 : public GameMode {
-public:
-    Game501();
-    int processThrow(int currentScore, int pointsScored) const override;
-    bool checkWinCondition(int currentScore) const override;
-    void printRules() const override;
-    GameMode* clone() const override;
-};
-
-class PracticeMode : public GameMode {
-public:
-    PracticeMode();
-    int processThrow(int currentScore, int pointsScored) const override;
-    bool checkWinCondition(int currentScore) const override;
-    void printRules() const override;
-    GameMode* clone() const override;
-};

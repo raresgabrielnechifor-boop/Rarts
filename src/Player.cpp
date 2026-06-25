@@ -31,7 +31,7 @@ bool Player::throwDart(int pointsScored, const GameMode* mode) {
         throw InvalidThrowException(pointsScored);
     }
 
-    throwHistory.push_back(pointsScored);
+    throwHistory.add(pointsScored);
 
     std::cout << name << " throws for " << pointsScored << "...\n";
 
@@ -47,25 +47,16 @@ bool Player::throwDart(int pointsScored, const GameMode* mode) {
     }
 }
 
-
 const std::string& Player::getName() const {
     return name;
 }
 
 void Player::printHistory() const {
-    std::cout << name << "'s throw history: ";
-    if (throwHistory.empty()) {
-        std::cout << "No throws yet.\n";
-        return;
-    }
-    for (int score : throwHistory) {
-        std::cout << score << " ";
-    }
-    std::cout << "\n";
+    throwHistory.printAll(name + "'s throw history");
 }
 
 std::ostream& operator<<(std::ostream& os, const Player& p) {
     os << "Player: " << p.name << " | Score/Target: " << p.currentScore
-       << " | Throws made: " << p.throwHistory.size() << " | " << p.myDart;
+       << " | Throws made: " << p.throwHistory.getSize() << " | " << p.myDart;
     return os;
 }

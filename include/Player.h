@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
 #include <iostream>
-#include <vector>
 #include "Dart.h"
+#include "Templates.h"
 
 class GameMode;
 
@@ -11,8 +11,7 @@ private:
     std::string name;
     int currentScore;
     Dart myDart;
-
-    std::vector<int> throwHistory;
+    Tracker<int> throwHistory;
 
 public:
     Player(const std::string& playerName, int initialScore, const Dart& playerDart);
@@ -26,8 +25,8 @@ public:
 
     int getCurrentScore() const { return currentScore; }
     const std::string& getName() const;
-
     void printHistory() const;
+    const Tracker<int>& getThrowHistory() const { return throwHistory; }
 
     friend std::ostream& operator<<(std::ostream& os, const Player& p);
 };

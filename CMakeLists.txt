@@ -63,6 +63,16 @@ add_executable(${MAIN_EXECUTABLE_NAME}
         src/GameMode.cpp
         src/AroundTheClockMode.cpp
         src/Exceptions.cpp
+        include/Game301.h
+        src/Game301.cpp
+        include/Game501.h
+        src/Game501.cpp
+        include/PracticeMode.h
+        src/PracticeMode.cpp
+        include/GameFactory.h
+        include/Logger.h
+        src/Logger.cpp
+        include/Templates.h
 )
 target_sources(${MAIN_EXECUTABLE_NAME}
     PRIVATE
